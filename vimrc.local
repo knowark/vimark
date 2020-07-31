@@ -18,16 +18,16 @@ call plug#begin(expand('~/.vim/plugged'))
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-plug'
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-surround'
 Plug 'altercation/vim-colors-solarized'
-Plug 'valloric/youcompleteme'
+Plug 'valloric/youcompleteme', {'do': './install.py --all'}
 Plug 'kien/ctrlp.vim'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 " #####
@@ -65,9 +65,35 @@ set confirm
 set ruler
 set undolevels=1000
 set backspace=indent,eol,start
+set term=xterm-256color
+
+" #########
+" Functions
+" #########
+
+let s:term_buf_nr = -1
+function! s:ToggleTerminal() abort
+    if s:term_buf_nr == -1
+        execute "botright terminal"
+        let s:term_buf_nr = bufnr("$")
+    else
+        try
+            execute "bdelete! " . s:term_buf_nr
+        catch
+            let s:term_buf_nr = -1
+            call <SID>ToggleTerminal()
+            return
+        endtry
+        let s:term_buf_nr = -1
+    endif
+endfunction
+
 
 " #########
 " Shortcuts
 " #########
 
-nmap <F12> :NERDTreeToggle<CR>
+nmap <F8> :q<CR>
+nmap <F4> :NERDTreeToggle<CR>
+nmap <silent> <F12> :call <SID>ToggleTerminal()<CR>
+tmap <silent> <F12> <C-w>N:call <SID>ToggleTerminal()<CR>
