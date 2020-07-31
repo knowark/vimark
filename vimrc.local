@@ -1,1 +1,66 @@
+" #######
+" Plugins
+" #######
+
+" Vim-Plug
+" ========
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Packages
+" ========
+
+call plug#begin(expand('~/.vim/plugged'))
+Plug 'junegunn/vim-plug'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+call plug#end()
+
+" #####
+" Setup
+" #####
+
 set mouse=a
+set nocompatible
+set scrolloff=5
+set ttyfast
+set laststatus=2
+set showmode
+set showcmd
+set encoding=utf-8
+
+set number
+set linebreak
+set showbreak=+++
+set textwidth=100
+set showmatch
+
+set hlsearch
+set smartcase
+set ignorecase
+set incsearch
+
+set autoindent
+set expandtab
+set shiftwidth=4
+set smartindent
+set smarttab
+set softtabstop=4
+
+set confirm
+set ruler
+set undolevels=1000
+set backspace=indent,eol,start
+
+" #########
+" Shortcuts
+" #########
+
+nmap <F12> :NERDTreeToggle<CR>
