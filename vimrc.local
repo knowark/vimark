@@ -31,6 +31,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 Plug 'zivyangll/git-blame.vim'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " #####
@@ -99,6 +100,7 @@ function! s:ToggleTerminal() abort
     endif
 endfunction
 
+au VimEnter *  NERDTree
 
 " #########
 " Shortcuts
@@ -108,3 +110,13 @@ nmap <F8> :q<CR>
 nmap <F4> :NERDTreeToggle<CR>
 nmap <silent> <F12> :call <SID>ToggleTerminal()<CR>
 tmap <silent> <F12> <C-w>N:call <SID>ToggleTerminal()<CR>
+nmap <A-Up> :m .-2<CR>==
+nmap <A-Down> :m .+1<CR>==
+imap <A-Up> <Esc>:m .-2<CR>==gi
+imap <A-Down> <Esc>:m .+1<CR>==gi
+vmap <A-Up> :m '<-2<CR>gv=gv
+vmap <A-Down> :m '>+1<CR>gv=gv
+nmap <S-Up> V
+nmap <S-Down> V
+vmap <S-Up> k
+vmap <S-Down> j
