@@ -32,6 +32,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/dbext.vim'
+Plug 'vim-scripts/mru.vim'
 Plug 'zivyangll/git-blame.vim'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
