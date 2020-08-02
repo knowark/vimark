@@ -19,24 +19,27 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-plug'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-surround'
-Plug 'crusoexia/vim-monokai'
+Plug 'flazz/vim-colorschemes'
 Plug 'valloric/youcompleteme', {'do': './install.py'}
 Plug 'kien/ctrlp.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/dbext.vim'
 Plug 'zivyangll/git-blame.vim'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
-" #####
-" Setup
-" #####
+
+" #######
+" Options
+" #######
 
 set mouse=a
 set nocompatible
@@ -45,12 +48,14 @@ set ttyfast
 set laststatus=2
 set showmode
 set showcmd
+set noswapfile
 set encoding=utf-8
 
 set number
 set linebreak
 set showbreak=+++
 set textwidth=100
+set colorcolumn=80
 set showmatch
 set nowrap
 
@@ -72,21 +77,20 @@ set undolevels=1000
 set backspace=indent,eol,start
 set termguicolors
 
-" #####
-" Theme
-" #####
 
-syntax on
-colorscheme monokai
+" #########
+" Variables
+" #########
+
 
 " #########
 " Functions
 " #########
 
 let s:term_buf_nr = -1
-function! s:ToggleTerminal() abort
+function! s:ToggleTerminal(side) abort
     if s:term_buf_nr == -1
-        execute "botright terminal"
+        execute a:side .  " terminal"
         let s:term_buf_nr = bufnr("$")
     else
         try
@@ -100,16 +104,36 @@ function! s:ToggleTerminal() abort
     endif
 endfunction
 
+
+" ###########
+" Autocommand
+" ###########
+
 au VimEnter *  NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
+    \ && b:NERDTree.isTabTree()) | q | endif
+
+
+" #####
+" Theme
+" #####
+
+syntax on
+colorscheme Benokai
+
 
 " #########
 " Shortcuts
 " #########
 
+map <space> <leader>
 nmap <F8> :q<CR>
 nmap <F4> :NERDTreeToggle<CR>
-nmap <silent> <F12> :call <SID>ToggleTerminal()<CR>
-tmap <silent> <F12> <C-w>N:call <SID>ToggleTerminal()<CR>
+nmap <silent> <F12> :call <SID>ToggleTerminal("bot")<CR>
+tmap <silent> <F12> <C-w>N:call <SID>ToggleTerminal("bot")<CR>
+nmap <silent> <S-F12> :call <SID>ToggleTerminal("vert bot")<CR>
+tmap <silent> <S-F12> <C-w>N:call <SID>ToggleTerminal("vert bot")<CR>
+
 nmap <A-Up> :m .-2<CR>==
 nmap <A-Down> :m .+1<CR>==
 imap <A-Up> <Esc>:m .-2<CR>==gi
