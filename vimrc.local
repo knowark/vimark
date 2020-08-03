@@ -160,3 +160,13 @@ nmap <S-Up> V
 nmap <S-Down> V
 vmap <S-Up> k
 vmap <S-Down> j
+
+nmap <Leader>gs :Gstatus<CR>
+nmap <Leader>gc :Gcommit<CR>
+nmap <Leader>gd :Gdiff<CR>
+nmap <Leader>gb :Gblame<CR>
+nmap <Leader>gr :Gread<CR>
+nmap <Leader>gw :Gwrite<CR>
+nmap <Leader>gp :Git push<CR>
+nmap <Leader>g- :Silent Git stash<CR>:e<CR>
+nmap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
