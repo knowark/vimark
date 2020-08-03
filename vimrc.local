@@ -37,6 +37,7 @@ Plug 'zivyangll/git-blame.vim'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'cosminadrianpopescu/vim-tail'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
