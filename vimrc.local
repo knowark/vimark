@@ -139,9 +139,10 @@ colorscheme Benokai
 map <space> <leader>
 map <Tab> <C-w>
 nmap <F2> :Startify<CR>
-nmap <F8> :q<CR>
 nmap <F3> :set invnumber<CR>
 nmap <F4> :NERDTreeToggle<CR>
+nmap <F6> :Gstatus<CR>
+nmap <F8> :q<CR>
 nmap <silent> <F12> :call <SID>ToggleTerminal("bot")<CR>
 tmap <silent> <F12> <C-w>N:call <SID>ToggleTerminal("bot")<CR>
 nmap <silent> <S-F12> :call <SID>ToggleTerminal("vert bot")<CR>
