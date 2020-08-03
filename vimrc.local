@@ -31,9 +31,12 @@ Plug 'kien/ctrlp.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
 Plug 'vim-scripts/dbext.vim'
-Plug 'vim-scripts/mru.vim'
 Plug 'zivyangll/git-blame.vim'
+Plug 'mhinz/vim-startify'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
@@ -77,12 +80,15 @@ set ruler
 set undolevels=1000
 set backspace=indent,eol,start
 set termguicolors
+set autowrite
+set autowriteall
 
 
 " #########
 " Variables
 " #########
 
+let g:rooter_patterns = ['.git']
 
 " #########
 " Functions
@@ -110,7 +116,7 @@ endfunction
 " Autocommand
 " ###########
 
-au VimEnter *  NERDTree
+autocmd VimEnter *  NERDTree | wincmd w
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
     \ && b:NERDTree.isTabTree()) | q | endif
 
@@ -128,6 +134,8 @@ colorscheme Benokai
 " #########
 
 map <space> <leader>
+map <Tab> <C-w>
+nmap <F2> :Startify<CR>
 nmap <F8> :q<CR>
 nmap <F3> :set invnumber<CR>
 nmap <F4> :NERDTreeToggle<CR>
@@ -135,6 +143,7 @@ nmap <silent> <F12> :call <SID>ToggleTerminal("bot")<CR>
 tmap <silent> <F12> <C-w>N:call <SID>ToggleTerminal("bot")<CR>
 nmap <silent> <S-F12> :call <SID>ToggleTerminal("vert bot")<CR>
 tmap <silent> <S-F12> <C-w>N:call <SID>ToggleTerminal("vert bot")<CR>
+imap <Esc> <Esc>:w<CR>
 
 nmap <A-Up> :m .-2<CR>==
 nmap <A-Down> :m .+1<CR>==
