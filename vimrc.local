@@ -54,6 +54,8 @@ set showmode
 set showcmd
 set noswapfile
 set encoding=utf-8
+set clipboard=unnamed
+set clipboard=unnamedplus
 
 set number
 set linebreak
@@ -144,6 +146,8 @@ tmap <silent> <F12> <C-w>N:call <SID>ToggleTerminal("bot")<CR>
 nmap <silent> <S-F12> :call <SID>ToggleTerminal("vert bot")<CR>
 tmap <silent> <S-F12> <C-w>N:call <SID>ToggleTerminal("vert bot")<CR>
 imap <Esc> <Esc>:w<CR>
+nmap <CR> o<Esc>
+nmap <Bs> dd
 
 nmap <A-Up> :m .-2<CR>==
 nmap <A-Down> :m .+1<CR>==
