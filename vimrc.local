@@ -31,13 +31,13 @@ Plug 'kien/ctrlp.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
 Plug 'vim-scripts/dbext.vim'
 Plug 'zivyangll/git-blame.vim'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'cosminadrianpopescu/vim-tail'
+Plug '907th/vim-auto-save'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
@@ -91,7 +91,7 @@ set autowriteall
 " Variables
 " #########
 
-let g:rooter_patterns = ['.git']
+let g:auto_save = 1
 
 " #########
 " Functions
@@ -120,6 +120,7 @@ endfunction
 " ###########
 
 autocmd VimEnter *  NERDTree | wincmd w
+autocmd InsertLeave * silent! update
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
     \ && b:NERDTree.isTabTree()) | q | endif
 
@@ -147,7 +148,7 @@ nmap <silent> <F12> :call <SID>ToggleTerminal("bot")<CR>
 tmap <silent> <F12> <C-w>N:call <SID>ToggleTerminal("bot")<CR>
 nmap <silent> <S-F12> :call <SID>ToggleTerminal("vert bot")<CR>
 tmap <silent> <S-F12> <C-w>N:call <SID>ToggleTerminal("vert bot")<CR>
-imap <Esc> <Esc>:w<CR>
+imap <C-CR> <Esc>
 nmap <CR> o<Esc>
 nmap <Bs> dd
 
