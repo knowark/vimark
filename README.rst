@@ -8,7 +8,7 @@ Installation
 
 In Ubuntu 20.04, download this file inside the **/etc/vim** directory:
 
-``sudo apt install -y build-essential cmake python3-dev vim``
+``sudo apt install -y build-essential cmake python3-dev silversearcher-ag vim``
 
 ``wget https://raw.githubusercontent.com/knowark/vimark/master/vimrc.local -O /etc/vim/vimrc.local``
 
