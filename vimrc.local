@@ -139,6 +139,7 @@ colorscheme Benokai
 
 map <space> <leader>
 map <Tab> <C-w>
+tmap <F1> <C-W>N
 nmap <F2> :Startify<CR>
 nmap <F3> :set invnumber<CR>
 nmap <F4> :NERDTreeToggle<CR>
@@ -176,3 +177,5 @@ nmap <C-S-Up> :Gpush<CR>
 nmap <C-S-Down> :Gpull<CR>
 nmap <C-S-CR> :Gcommit<CR>
 nmap <C-F> :Ag<CR>
+nmap <C-_> <Plug>NERDCommenterToggle
+vmap <C-_> <Plug>NERDCommenterToggle<Bar>gv
