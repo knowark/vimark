@@ -142,13 +142,13 @@ map <Tab> <C-w>
 nmap <F2> :Startify<CR>
 nmap <F3> :set invnumber<CR>
 nmap <F4> :NERDTreeToggle<CR>
-nmap <F6> :Gstatus<CR>
+nmap <F6> :Git<CR>
+nmap <F7> :Ag!<CR>
 nmap <F8> :q<CR>
 nmap <silent> <F12> :call <SID>ToggleTerminal("bot")<CR>
 tmap <silent> <F12> <C-w>N:call <SID>ToggleTerminal("bot")<CR>
 nmap <silent> <S-F12> :call <SID>ToggleTerminal("vert bot")<CR>
 tmap <silent> <S-F12> <C-w>N:call <SID>ToggleTerminal("vert bot")<CR>
-imap <C-CR> <Esc>
 nmap <CR> o<Esc>
 nmap <Bs> dd
 
@@ -169,6 +169,10 @@ nmap <Leader>gd :Gdiff<CR>
 nmap <Leader>gb :Gblame<CR>
 nmap <Leader>gr :Gread<CR>
 nmap <Leader>gw :Gwrite<CR>
-nmap <Leader>gp :Git push<CR>
+nmap <Leader>gp :Gpush<CR>
 nmap <Leader>g- :Silent Git stash<CR>:e<CR>
 nmap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
+nmap <C-S-Up> :Gpush<CR>
+nmap <C-S-Down> :Gpull<CR>
+nmap <C-S-CR> :Gcommit<CR>
+nmap <C-F> :Ag<CR>
