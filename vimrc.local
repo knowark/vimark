@@ -24,7 +24,6 @@ Plug 'dense-analysis/ale'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-Plug 'tpope/vim-surround'
 Plug 'flazz/vim-colorschemes'
 Plug 'valloric/youcompleteme', {'do': './install.py'}
 Plug 'kien/ctrlp.vim'
@@ -36,6 +35,7 @@ Plug 'zivyangll/git-blame.vim'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
 Plug 'cosminadrianpopescu/vim-tail'
 Plug '907th/vim-auto-save'
 Plug 'ryanoasis/vim-devicons'
@@ -82,7 +82,6 @@ set confirm
 set ruler
 set undolevels=1000
 set backspace=indent,eol,start
-set termguicolors
 set autowrite
 set autowriteall
 
@@ -92,6 +91,7 @@ set autowriteall
 " #########
 
 let g:auto_save = 1
+let g:rooter_patterns = ['.git']
 
 " #########
 " Functions
@@ -139,13 +139,13 @@ colorscheme Benokai
 
 map <space> <leader>
 map <Tab> <C-w>
-tmap <F1> <C-W>N
 nmap <F2> :Startify<CR>
 nmap <F3> :set invnumber<CR>
 nmap <F4> :NERDTreeToggle<CR>
 nmap <F6> :Git<CR>
 nmap <F7> :Ag!<CR>
 nmap <F8> :q<CR>
+tmap <F9> <C-W>N
 nmap <silent> <F12> :call <SID>ToggleTerminal("bot")<CR>
 tmap <silent> <F12> <C-w>N:call <SID>ToggleTerminal("bot")<CR>
 nmap <silent> <S-F12> :call <SID>ToggleTerminal("vert bot")<CR>
