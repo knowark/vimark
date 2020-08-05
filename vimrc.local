@@ -6,9 +6,9 @@
 " ========
 
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Packages
@@ -99,19 +99,19 @@ let g:rooter_patterns = ['.git']
 
 let s:term_buf_nr = -1
 function! s:ToggleTerminal(side) abort
-    if s:term_buf_nr == -1
-        execute a:side .  " terminal"
-        let s:term_buf_nr = bufnr("$")
-    else
-        try
-            execute "bdelete! " . s:term_buf_nr
-        catch
-            let s:term_buf_nr = -1
-            call <SID>ToggleTerminal()
-            return
-        endtry
-        let s:term_buf_nr = -1
-    endif
+if s:term_buf_nr == -1
+execute a:side .  " terminal"
+let s:term_buf_nr = bufnr("$")
+else
+try
+execute "bdelete! " . s:term_buf_nr
+catch
+let s:term_buf_nr = -1
+call <SID>ToggleTerminal()
+return
+endtry
+let s:term_buf_nr = -1
+endif
 endfunction
 
 
@@ -122,7 +122,7 @@ endfunction
 autocmd VimEnter *  NERDTree | wincmd w
 autocmd InsertLeave * silent! update
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
-    \ && b:NERDTree.isTabTree()) | q | endif
+\ && b:NERDTree.isTabTree()) | q | endif
 
 
 " #####
