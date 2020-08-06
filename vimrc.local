@@ -61,7 +61,6 @@ set clipboard=unnamedplus
 set number
 set linebreak
 set showbreak=+++
-set textwidth=100
 set colorcolumn=80
 set showmatch
 set nowrap
@@ -84,7 +83,7 @@ set undolevels=1000
 set backspace=indent,eol,start
 set autowrite
 set autowriteall
-
+set showtabline=2
 
 " #########
 " Variables
@@ -96,23 +95,6 @@ let g:rooter_patterns = ['.git']
 " #########
 " Functions
 " #########
-
-let s:term_buf_nr = -1
-function! s:ToggleTerminal(side) abort
-if s:term_buf_nr == -1
-execute a:side .  " terminal"
-let s:term_buf_nr = bufnr("$")
-else
-try
-execute "bdelete! " . s:term_buf_nr
-catch
-let s:term_buf_nr = -1
-call <SID>ToggleTerminal()
-return
-endtry
-let s:term_buf_nr = -1
-endif
-endfunction
 
 
 " ###########
@@ -138,6 +120,7 @@ colorscheme Benokai
 " #########
 
 map <space> <leader>
+map <S-Tab> :tabn<CR>
 map <Tab> <C-w>
 nmap <F2> :Startify<CR>
 nmap <F3> :set invnumber<CR>
@@ -145,13 +128,17 @@ nmap <F4> :NERDTreeToggle<CR>
 nmap <F6> :Git<CR>
 nmap <F7> :Ag!<CR>
 nmap <F8> :q<CR>
-tmap <F9> <C-W>N
-nmap <silent> <F12> :call <SID>ToggleTerminal("bot")<CR>
-tmap <silent> <F12> <C-w>N:call <SID>ToggleTerminal("bot")<CR>
-nmap <silent> <S-F12> :call <SID>ToggleTerminal("vert bot")<CR>
-tmap <silent> <S-F12> <C-w>N:call <SID>ToggleTerminal("vert bot")<CR>
-nmap <CR> o<Esc>
+nmap <S-F8> :q!<CR>
+
 nmap <Bs> dd
+nmap <CR> o<Esc>
+tmap <silent> <F12> <C-W>N
+nmap <expr> <S-F12> getbufvar('%', '&buftype') == 'terminal' ? ':q!<CR>' : ''
+nmap <expr> <F12> getbufvar('%', '&buftype') != 'terminal' ?
+\ ':tabnew <Bar> terminal ++curwin<CR>' : ''
+nmap <F9> :echo 'var:'.getbufvar('%', "&buftype")<CR>
+
+"nmap <F9> :echo 'hello'<CR>
 
 nmap <A-Up> :m .-2<CR>==
 nmap <A-Down> :m .+1<CR>==
