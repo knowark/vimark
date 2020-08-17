@@ -2,6 +2,13 @@
 " Plugins
 " #######
 
+" System Dependencies
+" ===================
+
+if !executable('ag')
+silent !sudo apt install silversearcher-ag
+endif
+
 " Vim-Plug
 " ========
 
@@ -14,7 +21,11 @@ endif
 " Packages
 " ========
 
-call plug#begin(expand('~/.vim/plugged'))
+if empty(glob('/etc/vim/plugged'))
+silent !mkdir -p /etc/vim/plugged
+endif
+
+call plug#begin(expand('/etc/vim/plugged'))
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-plug'
 Plug 'scrooloose/nerdtree'
@@ -25,19 +36,21 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
-Plug 'valloric/youcompleteme', {'do': './install.py'}
-Plug 'kien/ctrlp.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/dbext.vim'
 Plug 'zivyangll/git-blame.vim'
 Plug 'mhinz/vim-startify'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'dyng/ctrlsf.vim'
 Plug 'airblade/vim-rooter'
 Plug 'cosminadrianpopescu/vim-tail'
 Plug '907th/vim-auto-save'
+Plug 'chrisbra/csv.vim'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'davidhalter/jedi-vim'
+Plug 'ervandew/supertab'
+Plug 'jiangmiao/auto-pairs'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
@@ -47,6 +60,7 @@ call plug#end()
 " #######
 
 set mouse=a
+set ttymouse=xterm
 set nocompatible
 set scrolloff=5
 set ttyfast
@@ -62,10 +76,9 @@ set number
 set linebreak
 set showbreak=+++
 set colorcolumn=80
-set showmatch
 set nowrap
-
 set hlsearch
+
 set smartcase
 set ignorecase
 set incsearch
@@ -76,6 +89,8 @@ set shiftwidth=4
 set smartindent
 set smarttab
 set softtabstop=4
+set cmdheight=2
+set shortmess+=c
 
 set confirm
 set ruler
@@ -84,6 +99,9 @@ set backspace=indent,eol,start
 set autowrite
 set autowriteall
 set showtabline=2
+set signcolumn=number
+set completeopt-=preview
+
 
 " #########
 " Variables
@@ -91,20 +109,30 @@ set showtabline=2
 
 let g:auto_save = 1
 let g:rooter_patterns = ['.git']
+let g:ale_fix_on_save = 1
+let g:ale_set_balloons = 1
+let g:ale_linters = {
+\ 'python': ['pycodestyle']
+\}
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['standard'],
+\   'python': ['autopep8']
+\}
+let g:jedi#usages_command = ""
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:NERDTreeWinSize=40
+let g:ctrlsf_default_root = 'project'
+let g:ctrlsf_auto_focus = {
+\ "at": "start"
+\ }
+let g:ctrlsf_mapping = {
+\ "popen": "<Space>"
+\ }
 
 " #########
 " Functions
 " #########
-
-
-" ###########
-" Autocommand
-" ###########
-
-autocmd VimEnter *  NERDTree | wincmd w
-autocmd InsertLeave * silent! update
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
-\ && b:NERDTree.isTabTree()) | q | endif
 
 
 " #####
@@ -114,6 +142,20 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
 syntax on
 colorscheme Benokai
 
+" ###########
+" Autocommand
+" ###########
+
+autocmd VimEnter *  NERDTree | wincmd w
+autocmd InsertLeave * silent! update
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
+\ && b:NERDTree.isTabTree()) | q | endif
+autocmd ColorScheme * highlight Pmenu ctermfg=NONE ctermbg=236
+\ cterm=NONE guifg=NONE guibg=#64666d gui=NONE
+autocmd ColorScheme * highlight PmenuSel ctermfg=NONE ctermbg=24
+\ cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
+autocmd ColorScheme * highlight Search ctermfg=NONE ctermbg=11
+\ cterm=reverse guifg=NONE guibg=#204a87 gui=NONE
 
 " #########
 " Shortcuts
@@ -129,6 +171,7 @@ nmap <F6> :Git<CR>
 nmap <F7> :Ag!<CR>
 nmap <F8> :q<CR>
 nmap <S-F8> :q!<CR>
+nmap <silent> <esc><esc> :noh<return>
 
 nmap <Bs> dd
 nmap <CR> o<Esc>
@@ -136,9 +179,6 @@ tmap <silent> <F12> <C-W>N
 nmap <expr> <S-F12> getbufvar('%', '&buftype') == 'terminal' ? ':q!<CR>' : ''
 nmap <expr> <F12> getbufvar('%', '&buftype') != 'terminal' ?
 \ ':tabnew <Bar> terminal ++curwin<CR>' : ''
-nmap <F9> :echo 'var:'.getbufvar('%', "&buftype")<CR>
-
-"nmap <F9> :echo 'hello'<CR>
 
 nmap <A-Up> :m .-2<CR>==
 nmap <A-Down> :m .+1<CR>==
@@ -160,9 +200,19 @@ nmap <Leader>gw :Gwrite<CR>
 nmap <Leader>gp :Gpush<CR>
 nmap <Leader>g- :Silent Git stash<CR>:e<CR>
 nmap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
+nmap <Leader>n  :NERDTreeFind<CR>
 nmap <C-S-Up> :Gpush<CR>
 nmap <C-S-Down> :Gpull<CR>
 nmap <C-S-CR> :Gcommit<CR>
 nmap <C-F> :Ag<CR>
 nmap <C-_> <Plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle<Bar>gv
+
+nmap     <C-F> <Plug>CtrlSFPrompt
+vmap     <C-F> <Plug>CtrlSFVwordPath
+vmap     <C-F>F <Plug>CtrlSFVwordExec
+nmap     <C-F>n <Plug>CtrlSFCwordPath
+nmap     <C-F>p <Plug>CtrlSFPwordPath
+nmap <C-F>o :CtrlSFOpen<CR>
+nmap <C-F>t :CtrlSFToggle<CR>
+imap <C-F>t <Esc>:CtrlSFToggle<CR>
