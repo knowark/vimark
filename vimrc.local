@@ -52,6 +52,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ryanoasis/vim-devicons'
+Plug 'brooth/far.vim'
 call plug#end()
 
 
@@ -78,10 +79,13 @@ set showbreak=+++
 set colorcolumn=80
 set nowrap
 set hlsearch
+set lazyredraw
 
-set smartcase
 set ignorecase
+set smartcase
 set incsearch
+set confirm
+set ruler
 
 set autoindent
 set expandtab
@@ -92,8 +96,6 @@ set softtabstop=4
 set cmdheight=2
 set shortmess+=c
 
-set confirm
-set ruler
 set undolevels=1000
 set backspace=indent,eol,start
 set autowrite
@@ -101,7 +103,6 @@ set autowriteall
 set showtabline=2
 set signcolumn=number
 set completeopt-=preview
-
 
 " #########
 " Variables
@@ -112,7 +113,7 @@ let g:rooter_patterns = ['.git']
 let g:ale_fix_on_save = 1
 let g:ale_set_balloons = 1
 let g:ale_linters = {
-\ 'python': ['pycodestyle']
+\ 'python': ['pycodestyle', 'mypy']
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -138,7 +139,7 @@ let g:ctrlsf_mapping = {
 " #####
 " Theme
 " #####
-
+"
 syntax on
 colorscheme Benokai
 
@@ -156,6 +157,7 @@ autocmd ColorScheme * highlight PmenuSel ctermfg=NONE ctermbg=24
 \ cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
 autocmd ColorScheme * highlight Search ctermfg=NONE ctermbg=11
 \ cterm=reverse guifg=NONE guibg=#204a87 gui=NONE
+command! BufOnly execute '%bdelete|edit #|normal `"'
 
 " #########
 " Shortcuts
@@ -208,11 +210,11 @@ nmap <C-F> :Ag<CR>
 nmap <C-_> <Plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle<Bar>gv
 
-nmap     <C-F> <Plug>CtrlSFPrompt
-vmap     <C-F> <Plug>CtrlSFVwordPath
-vmap     <C-F>F <Plug>CtrlSFVwordExec
-nmap     <C-F>n <Plug>CtrlSFCwordPath
-nmap     <C-F>p <Plug>CtrlSFPwordPath
+nmap <C-F> <Plug>CtrlSFPrompt
+vmap <C-F> <Plug>CtrlSFVwordPath
+vmap <C-F>F <Plug>CtrlSFVwordExec
+nmap <C-F>n <Plug>CtrlSFCwordPath
+nmap <C-F>p <Plug>CtrlSFPwordPath
 nmap <C-F>o :CtrlSFOpen<CR>
 nmap <C-F>t :CtrlSFToggle<CR>
 imap <C-F>t <Esc>:CtrlSFToggle<CR>
