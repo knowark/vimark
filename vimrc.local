@@ -50,7 +50,7 @@ Plug 'chrisbra/csv.vim'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'davidhalter/jedi-vim'
 Plug 'ervandew/supertab'
-Plug 'jiangmiao/auto-pairs'
+Plug 'raimondi/delimitmate'
 Plug 'ryanoasis/vim-devicons'
 Plug 'brooth/far.vim'
 call plug#end()
@@ -131,6 +131,8 @@ let g:ctrlsf_auto_focus = {
 let g:ctrlsf_mapping = {
 \ "popen": "<Space>"
 \ }
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
 
 " #########
 " Functions
