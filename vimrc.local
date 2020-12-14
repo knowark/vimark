@@ -5,8 +5,8 @@
 " System Dependencies
 " ===================
 
-if !executable('ag')
-silent !sudo apt install silversearcher-ag
+if !executable('rg')
+silent !sudo apt install ripgrep
 endif
 
 " Vim-Plug
@@ -48,11 +48,18 @@ Plug 'cosminadrianpopescu/vim-tail'
 Plug '907th/vim-auto-save'
 Plug 'chrisbra/csv.vim'
 Plug 'hynek/vim-python-pep8-indent'
-Plug 'davidhalter/jedi-vim'
 Plug 'ervandew/supertab'
 Plug 'raimondi/delimitmate'
 Plug 'ryanoasis/vim-devicons'
 Plug 'brooth/far.vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'carlitux/deoplete-ternjs'
+Plug 'sheerun/vim-polyglot'
+Plug 'jonsmithers/vim-html-template-literals'
+Plug 'pangloss/vim-javascript'
 call plug#end()
 
 
@@ -133,11 +140,19 @@ let g:ctrlsf_mapping = {
 \ }
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
+let g:javascript_plugin_jsdoc = 1
+let g:deoplete#enable_at_startup = 1
+let g:html_indent_style1 = "inc"
+let g:htl_all_templates = 1
+let g:far#source = 'rg'
+let g:far#ignore_files = ['.gitignore']
+let g:far#preview_window_height = 15
 
 " #########
 " Functions
 " #########
 
+call deoplete#custom#option('auto_complete_delay', 1)
 
 " #####
 " Theme
@@ -162,6 +177,9 @@ autocmd ColorScheme * highlight Search ctermfg=NONE ctermbg=11
 \ cterm=reverse guifg=NONE guibg=#204a87 gui=NONE
 command! BufOnly execute '%bdelete|edit #|normal `"'
 
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+
 " #########
 " Shortcuts
 " #########
@@ -173,7 +191,6 @@ nmap <F2> :Startify<CR>
 nmap <F3> :set invnumber<CR>
 nmap <F4> :NERDTreeToggle<CR>
 nmap <F6> :Git<CR>
-nmap <F7> :Ag!<CR>
 nmap <F8> :q<CR>
 nmap <S-F8> :q!<CR>
 nmap <silent> <esc><esc> :noh<return>
@@ -209,7 +226,6 @@ nmap <Leader>n  :NERDTreeFind<CR>
 nmap <C-S-Up> :Gpush<CR>
 nmap <C-S-Down> :Gpull<CR>
 nmap <C-S-CR> :Gcommit<CR>
-nmap <C-F> :Ag<CR>
 nmap <C-_> <Plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle<Bar>gv
 
