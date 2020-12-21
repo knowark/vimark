@@ -26,40 +26,45 @@ silent !mkdir -p /etc/vim/plugged
 endif
 
 call plug#begin(expand('/etc/vim/plugged'))
-Plug 'tpope/vim-surround'
+Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
+Plug 'brooth/far.vim'
+Plug 'carlitux/deoplete-ternjs'
+Plug 'chrisbra/csv.vim'
+Plug 'cosminadrianpopescu/vim-tail'
+Plug 'dense-analysis/ale'
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'dyng/ctrlsf.vim'
+Plug 'ervandew/supertab'
+Plug 'flazz/vim-colorschemes'
+Plug 'honza/vim-snippets'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'itchyny/vim-gitbranch'
 Plug 'junegunn/vim-plug'
+Plug 'jonsmithers/vim-html-template-literals'
+Plug 'mhinz/vim-startify'
+Plug 'mhartington/deoplete-typescript'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'pangloss/vim-javascript'
+Plug 'psliwka/vim-smoothie'
+Plug 'raimondi/delimitmate'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'dense-analysis/ale'
+Plug 'sheerun/vim-polyglot'
+Plug 'Shougo/deoplete.nvim'
+Plug 'SirVer/ultisnips'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-Plug 'flazz/vim-colorschemes'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/dbext.vim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'zivyangll/git-blame.vim'
-Plug 'mhinz/vim-startify'
-Plug 'dyng/ctrlsf.vim'
-Plug 'airblade/vim-rooter'
-Plug 'cosminadrianpopescu/vim-tail'
 Plug '907th/vim-auto-save'
-Plug 'chrisbra/csv.vim'
-Plug 'hynek/vim-python-pep8-indent'
-Plug 'ervandew/supertab'
-Plug 'raimondi/delimitmate'
-Plug 'ryanoasis/vim-devicons'
-Plug 'brooth/far.vim'
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'carlitux/deoplete-ternjs'
-Plug 'sheerun/vim-polyglot'
-Plug 'jonsmithers/vim-html-template-literals'
-Plug 'pangloss/vim-javascript'
 call plug#end()
 
 
@@ -120,13 +125,17 @@ let g:rooter_patterns = ['.git']
 let g:ale_fix_on_save = 1
 let g:ale_set_balloons = 1
 let g:ale_linters = {
-\ 'python': ['pycodestyle', 'mypy']
+\ 'python': ['pycodestyle', 'mypy'],
+\ 'javascript': ['standard']
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['standard'],
 \   'python': ['autopep8']
 \}
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+
 let g:jedi#usages_command = ""
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:NERDTreeWinSize=40
@@ -141,18 +150,21 @@ let g:ctrlsf_mapping = {
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 let g:javascript_plugin_jsdoc = 1
-let g:deoplete#enable_at_startup = 1
 let g:html_indent_style1 = "inc"
 let g:htl_all_templates = 1
 let g:far#source = 'rg'
 let g:far#ignore_files = ['.gitignore']
 let g:far#preview_window_height = 15
-
+let g:deoplete#enable_at_startup = 1
+let g:UltiSnipsExpandTrigger="M"
 " #########
 " Functions
 " #########
 
-call deoplete#custom#option('auto_complete_delay', 1)
+call deoplete#custom#option({
+\ 'auto_complete_delay': 1,
+\ '_': ['ale']
+\})
 
 " #####
 " Theme
@@ -191,6 +203,7 @@ nmap <F2> :Startify<CR>
 nmap <F3> :set invnumber<CR>
 nmap <F4> :NERDTreeToggle<CR>
 nmap <F6> :Git<CR>
+nmap <F7> :Farf<cr>
 nmap <F8> :q<CR>
 nmap <S-F8> :q!<CR>
 nmap <silent> <esc><esc> :noh<return>
