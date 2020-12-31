@@ -163,6 +163,7 @@ let g:UltiSnipsExpandTrigger="M"
 
 call deoplete#custom#option({
 \ 'auto_complete_delay': 1,
+\ 'num_processes': 4,
 \ '_': ['ale']
 \})
 
