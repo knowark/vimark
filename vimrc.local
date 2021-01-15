@@ -25,15 +25,15 @@ if empty(glob('/etc/vim/plugged'))
 silent !mkdir -p /etc/vim/plugged
 endif
 
+
 call plug#begin(expand('/etc/vim/plugged'))
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'brooth/far.vim'
-Plug 'carlitux/deoplete-ternjs'
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'cosminadrianpopescu/vim-tail'
 Plug 'dense-analysis/ale'
-Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'dyng/ctrlsf.vim'
 Plug 'ervandew/supertab'
 Plug 'flazz/vim-colorschemes'
@@ -42,8 +42,8 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'itchyny/vim-gitbranch'
 Plug 'junegunn/vim-plug'
 Plug 'jonsmithers/vim-html-template-literals'
+Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
-Plug 'mhartington/deoplete-typescript'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'pangloss/vim-javascript'
 Plug 'psliwka/vim-smoothie'
@@ -54,9 +54,9 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/deoplete.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-haml'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -66,7 +66,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'zivyangll/git-blame.vim'
 Plug '907th/vim-auto-save'
 call plug#end()
-
 
 " #######
 " Options
@@ -121,12 +120,14 @@ set completeopt-=preview
 " #########
 
 let g:auto_save = 1
-let g:rooter_patterns = ['.git']
+let g:ale_linters_explicit = 1
+let g:ale_completion_enabled = 1
+let g:ale_completion_delay = 20
+let g:ale_completion_autoimport = 1
 let g:ale_fix_on_save = 1
-let g:ale_set_balloons = 1
 let g:ale_linters = {
-\ 'python': ['pycodestyle', 'mypy'],
-\ 'javascript': ['standard']
+\ 'python': ['pyright', 'pycodestyle', 'mypy'],
+\ 'javascript': ['tsserver', 'standard']
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -135,8 +136,8 @@ let g:ale_fixers = {
 \}
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
-
-let g:jedi#usages_command = ""
+let g:airline#extensions#ale#enabled = 1
+let g:rooter_patterns = ['.git']
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:NERDTreeWinSize=40
 let g:NERDTreeShowHidden=1
@@ -155,17 +156,9 @@ let g:htl_all_templates = 1
 let g:far#source = 'rg'
 let g:far#ignore_files = ['.gitignore']
 let g:far#preview_window_height = 15
-let g:deoplete#enable_at_startup = 1
-let g:UltiSnipsExpandTrigger="M"
-" #########
-" Functions
-" #########
-
-call deoplete#custom#option({
-\ 'auto_complete_delay': 1,
-\ 'num_processes': 4,
-\ '_': ['ale']
-\})
+let g:UltiSnipsExpandTrigger = "M"
+let g:user_emmet_mode='n'
+let g:user_emmet_leader_key=','
 
 " #####
 " Theme
@@ -190,8 +183,11 @@ autocmd ColorScheme * highlight Search ctermfg=NONE ctermbg=11
 \ cterm=reverse guifg=NONE guibg=#204a87 gui=NONE
 command! BufOnly execute '%bdelete|edit #|normal `"'
 
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType css setlocal shiftwidth=2 tabstop=2
+autocmd FileType scss setlocal shiftwidth=2 tabstop=2
+autocmd FileType sass setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 
 " #########
 " Shortcuts
@@ -242,6 +238,8 @@ nmap <C-S-Down> :Gpull<CR>
 nmap <C-S-CR> :Gcommit<CR>
 nmap <C-_> <Plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle<Bar>gv
+imap <C-Space> <C-x><C-o>
+imap <C-@> <C-Space>
 
 nmap <C-F> <Plug>CtrlSFPrompt
 vmap <C-F> <Plug>CtrlSFVwordPath
