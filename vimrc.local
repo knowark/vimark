@@ -44,6 +44,7 @@ Plug 'junegunn/vim-plug'
 Plug 'jonsmithers/vim-html-template-literals'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
+Plug 'mitsuhiko/vim-rst'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'pangloss/vim-javascript'
 Plug 'psliwka/vim-smoothie'
@@ -156,7 +157,7 @@ let g:htl_all_templates = 1
 let g:far#source = 'rg'
 let g:far#ignore_files = ['.gitignore']
 let g:far#preview_window_height = 15
-let g:UltiSnipsExpandTrigger = "M"
+let g:UltiSnipsExpandTrigger = ""
 let g:user_emmet_mode='n'
 let g:user_emmet_leader_key=','
 
