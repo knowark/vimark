@@ -158,7 +158,7 @@ let g:htl_all_templates = 1
 let g:far#source = 'rg'
 let g:far#ignore_files = ['.gitignore']
 let g:far#preview_window_height = 15
-let g:UltiSnipsExpandTrigger = ""
+let g:UltiSnipsExpandTrigger = "<leader>Enter"
 let g:user_emmet_mode='n'
 let g:user_emmet_leader_key=','
 
