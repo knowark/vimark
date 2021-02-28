@@ -25,7 +25,6 @@ if empty(glob('/etc/vim/plugged'))
 silent !mkdir -p /etc/vim/plugged
 endif
 
-
 call plug#begin(expand('/etc/vim/plugged'))
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -34,6 +33,7 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'cosminadrianpopescu/vim-tail'
 Plug 'dense-analysis/ale'
+Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'dyng/ctrlsf.vim'
 Plug 'ervandew/supertab'
 Plug 'flazz/vim-colorschemes'
@@ -55,7 +55,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
-Plug 'SirVer/ultisnips'
+Plug 'shougo/deoplete.nvim'
+Plug 'sirVer/ultisnips'
 Plug 'stormherz/tablify'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-haml'
@@ -64,7 +65,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/dbext.vim'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'zivyangll/git-blame.vim'
 Plug '907th/vim-auto-save'
 call plug#end()
@@ -161,6 +162,12 @@ let g:far#preview_window_height = 15
 let g:UltiSnipsExpandTrigger = "<leader>Enter"
 let g:user_emmet_mode='n'
 let g:user_emmet_leader_key=','
+
+if system("python3 -c 'import pynvim'; echo $?") == 0
+let g:deoplete#enable_at_startup = 1
+else
+echo "Deoplete requires 'pynvim' (pip install pynvim)"
+endif
 
 " #####
 " Theme
