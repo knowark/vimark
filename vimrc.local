@@ -67,7 +67,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/dbext.vim'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'zivyangll/git-blame.vim'
-Plug '907th/vim-auto-save'
+Plug 'vim-scripts/vim-auto-save'
 call plug#end()
 
 " #######
@@ -104,7 +104,7 @@ set ruler
 set autoindent
 set expandtab
 set shiftwidth=4
-set smartindent
+"set smartindent
 set smarttab
 set softtabstop=4
 set cmdheight=2
@@ -123,11 +123,12 @@ set completeopt-=preview
 " #########
 
 let g:auto_save = 1
+let g:auto_save_in_insert_mode = 0
+let g:ale_fix_on_save = 1
 let g:ale_linters_explicit = 1
 let g:ale_completion_enabled = 1
 let g:ale_completion_delay = 20
 let g:ale_completion_autoimport = 1
-let g:ale_fix_on_save = 1
 let g:ale_linters = {
 \ 'python': ['pyright', 'pycodestyle', 'mypy'],
 \ 'javascript': ['tsserver', 'standard']
@@ -135,7 +136,8 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['standard'],
-\   'python': ['autopep8']
+\   'python': ['autopep8'],
+\   'html': ['prettier']
 \}
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
@@ -193,6 +195,7 @@ autocmd ColorScheme * highlight Search ctermfg=NONE ctermbg=11
 command! BufOnly execute '%bdelete|edit #|normal `"'
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2
 autocmd FileType css setlocal shiftwidth=2 tabstop=2
 autocmd FileType scss setlocal shiftwidth=2 tabstop=2
 autocmd FileType sass setlocal shiftwidth=2 tabstop=2
@@ -213,6 +216,7 @@ nmap <F7> :Farf<cr>
 nmap <F8> :q<CR>
 nmap <S-F8> :q!<CR>
 nmap <silent> <esc><esc> :noh<return>
+imap <c-space> <c-x><c-o>
 
 nmap <Bs> dd
 nmap <CR> o<Esc>
