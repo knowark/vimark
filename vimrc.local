@@ -9,6 +9,10 @@ if !executable('rg')
 silent !sudo apt install ripgrep
 endif
 
+if system("python3 -c 'import pynvim'; echo $?") != 0
+silent !pip3 install pynvim
+endif
+
 " Vim-Plug
 " ========
 
@@ -164,12 +168,7 @@ let g:far#preview_window_height = 15
 let g:UltiSnipsExpandTrigger = "<leader>Enter"
 let g:user_emmet_mode='n'
 let g:user_emmet_leader_key=','
-
-if system("python3 -c 'import pynvim'; echo $?") == 0
 let g:deoplete#enable_at_startup = 1
-else
-echo "Deoplete requires 'pynvim' (pip install pynvim)"
-endif
 
 " #####
 " Theme
