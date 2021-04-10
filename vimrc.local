@@ -13,6 +13,10 @@ if system("python3 -c 'import pynvim'; echo $?") != 0
 silent !pip3 install pynvim
 endif
 
+if system("python3 -c 'import jedi'; echo $?") != 0
+silent !pip3 install jedi
+endif
+
 " Vim-Plug
 " ========
 
