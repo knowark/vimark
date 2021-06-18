@@ -15,6 +15,6 @@ That's all!
 Note
 ----
 
-You can install fonts required by NerdTree in https://www.nerdfonts.com/font-downloads.
+You can install the fonts required by DevIcons in https://www.nerdfonts.com/font-downloads.
 Simply download a compatible font (e.g. FiraCode Nerd Font), extract the archive and
 double click the bold and regular *.odt files to install them.
