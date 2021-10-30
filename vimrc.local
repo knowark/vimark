@@ -74,6 +74,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/dbext.vim'
+Plug 'vim-voom/voom'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'zivyangll/git-blame.vim'
 Plug 'vim-scripts/vim-auto-save'
@@ -174,6 +175,10 @@ let g:UltiSnipsExpandTrigger = "<leader>Enter"
 let g:user_emmet_mode='n'
 let g:user_emmet_leader_key=','
 let g:deoplete#enable_at_startup = 1
+let g:voom_default_mode = "rest"                   
+let g:voom_tree_placement = "right"                
+let g:voom_tree_width = 50                         
+let g:voom_tab_key = "<S-Tab>"                     
 
 " #####
 " Theme
