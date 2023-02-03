@@ -2,21 +2,6 @@
 " Plugins
 " #######
 
-" System Dependencies
-" ===================
-
-if !executable('rg')
-silent !sudo apt install ripgrep
-endif
-
-if system("python3 -c 'import pynvim'; echo $?") != 0
-silent !pip3 install pynvim
-endif
-
-if system("python3 -c 'import jedi'; echo $?") != 0
-silent !pip3 install jedi
-endif
-
 " Vim-Plug
 " ========
 
@@ -48,7 +33,6 @@ Plug 'ervandew/supertab'
 Plug 'flazz/vim-colorschemes'
 Plug 'herringtondarkholme/yats.vim'
 Plug 'honza/vim-snippets'
-Plug 'hynek/vim-python-pep8-indent'
 Plug 'itchyny/vim-gitbranch'
 Plug 'jonsmithers/vim-html-template-literals'
 Plug 'jparise/vim-graphql'
@@ -146,21 +130,17 @@ let g:ale_linters_explicit = 1
 let g:ale_completion_enabled = 0
 let g:ale_completion_autoimport = 1
 let g:ale_linters = {
-\ 'python': ['pyright', 'pycodestyle', 'mypy'],
 \ 'javascript': ['tsserver', 'standard']
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['standard'],
-\   'python': ['autopep8'],
 \   'html': ['prettier']
 \}
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 let g:airline#extensions#ale#enabled = 1
 let g:rooter_patterns = ['.git']
-let g:NERDTreeWinSize=30
-let g:NERDTreeShowHidden=1
 let g:ctrlsf_default_root = 'project'
 let g:ctrlsf_auto_focus = {
 \ "at": "start"
@@ -188,6 +168,8 @@ let g:grammarous#show_first_error = 1
 let g:coc_disable_startup_warning = 1
 let g:javascript_plugin_jsdoc = 1
 let g:colorizer_auto_filetype='css,html,js'
+let g:NERDTreeWinSize=24
+let g:NERDTreeShowHidden=1
 
 " #####
 " Theme
@@ -218,8 +200,6 @@ autocmd FileType scss setlocal shiftwidth=2 tabstop=2
 autocmd FileType sass setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 autocmd FileType json setlocal shiftwidth=2 tabstop=2
-autocmd FileType python setlocal shiftwidth=4 tabstop=4
-autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2
 autocmd FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 autocmd BufRead,BufNewFile *.njk set filetype=html
 autocmd BufRead,BufNewFile *.webc set filetype=html
@@ -231,14 +211,6 @@ autocmd BufRead,BufNewFile *.webc set filetype=html
 map <space> <leader>
 map <S-Tab> :tabn<CR>
 map <Tab> <C-w>
-"nmap <F2> :Startify<CR>
-"nmap <F3> :q<CR>
-"nmap <S-F3> :q!<CR>
-"nmap <F4> :NERDTreeToggle<CR>
-"nmap <F6> :Git<CR>
-"nmap <F7> :Farf<cr>
-"nmap <F8> :q<CR>
-"nmap <S-F8> :q!<CR>
 nmap <silent> <esc><esc> :noh<return>
 imap <c-space> <c-x><c-o>
 
