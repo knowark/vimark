@@ -176,7 +176,8 @@ let g:NERDTreeShowHidden=1
 " #####
 
 syntax on
-colorscheme Benokai
+set background=dark
+colorscheme jellybeans
 
 " ###########
 " Autocommand
