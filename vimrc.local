@@ -89,6 +89,7 @@ set colorcolumn=80
 set nowrap
 set hlsearch
 set lazyredraw
+set fillchars+=vert:║
 
 set ignorecase
 set smartcase
