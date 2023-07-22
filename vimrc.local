@@ -168,7 +168,7 @@ let g:grammarous#show_first_error = 1
 let g:coc_disable_startup_warning = 1
 let g:javascript_plugin_jsdoc = 1
 let g:colorizer_auto_filetype='css,html,js'
-let g:NERDTreeWinSize=24
+let g:NERDTreeWinSize=30
 let g:NERDTreeShowHidden=1
 
 " #####
