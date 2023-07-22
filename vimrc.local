@@ -262,6 +262,14 @@ nmap <C-F>t :CtrlSFToggle<CR>
 imap <C-F>t <Esc>:CtrlSFToggle<CR>
 
 " ########
+" startify
+" ########
+
+let g:startify_lists = [
+  \ { 'type': 'dir', 'header': ['   MRU '. getcwd()] },
+  \ ]
+
+" ########
 " coc.nvim
 " ########
 
