@@ -71,7 +71,6 @@ call plug#end()
 " #######
 
 set mouse=a
-set ttymouse=xterm2
 set nocompatible
 set scrolloff=5
 set ttyfast
