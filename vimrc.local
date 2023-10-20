@@ -38,11 +38,15 @@ Plug 'jonsmithers/vim-html-template-literals'
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-plug'
+Plug 'lfilho/cosco.vim'
+Plug 'luochen1990/rainbow'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 Plug 'mitsuhiko/vim-rst'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'neoclide/coc-tsserver'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nlknguyen/vim-maven-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'raimondi/delimitmate'
 Plug 'rhysd/vim-grammarous'
@@ -179,6 +183,12 @@ syntax on
 set background=dark
 colorscheme jellybeans
 
+let java_highlight_functions = 1
+let java_highlight_all = 1
+highlight link javaScopeDecl Statement
+highlight link javaType Type
+highlight link javaDocTags PreProc
+
 " ###########
 " Autocommand
 " ###########
@@ -199,11 +209,14 @@ autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType css setlocal shiftwidth=2 tabstop=2
 autocmd FileType scss setlocal shiftwidth=2 tabstop=2
 autocmd FileType sass setlocal shiftwidth=2 tabstop=2
+autocmd FileType gql setlocal shiftwidth=2 tabstop=2
+autocmd FileType java setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 autocmd FileType json setlocal shiftwidth=2 tabstop=2
 autocmd FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
-autocmd BufRead,BufNewFile *.njk set filetype=html
-autocmd BufRead,BufNewFile *.webc set filetype=html
+
+autocmd FileType css,java nmap <silent> <Leader>; <Plug>(cosco-commaOrSemiColon)
+autocmd FileType css,java imap <silent> <Leader>; <c-o><Plug>(cosco-commaOrSemiColon)
 
 " #########
 " Shortcuts
@@ -211,7 +224,7 @@ autocmd BufRead,BufNewFile *.webc set filetype=html
 
 map <space> <leader>
 map <S-Tab> :tabn<CR>
-map <Tab> <C-w>
+map <tab> <c-w>
 nmap <silent> <esc><esc> :noh<return>
 imap <c-space> <c-x><c-o>
 
