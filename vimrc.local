@@ -183,6 +183,7 @@ syntax on
 set background=dark
 colorscheme jellybeans
 
+let g:rainbow_active = 1 
 let java_highlight_functions = 1
 let java_highlight_all = 1
 highlight link javaScopeDecl Statement
