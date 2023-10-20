@@ -39,7 +39,6 @@ Plug 'jparise/vim-graphql'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-plug'
 Plug 'lfilho/cosco.vim'
-Plug 'luochen1990/rainbow'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 Plug 'mitsuhiko/vim-rst'
@@ -127,7 +126,6 @@ set nofoldenable
 " Variables
 " #########
 
-let g:auto_save = 1
 let g:auto_save_in_insert_mode = 0
 let g:ale_fix_on_save = 1
 let g:ale_linters_explicit = 1
